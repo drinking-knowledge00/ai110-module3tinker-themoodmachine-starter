@@ -23,6 +23,17 @@ POSITIVE_WORDS = [
     "chill",
     "relaxed",
     "amazing",
+    # added during lab expansion
+    "hopeful",
+    "decent",
+    "hyped",
+    "immaculate",
+    "crushing",
+    "💪",
+    "vibes",
+    "proud",
+    "wonderful",
+    "happy_emoji",  # mapped from :) in preprocess
 ]
 
 NEGATIVE_WORDS = [
@@ -36,6 +47,14 @@ NEGATIVE_WORDS = [
     "stressed",
     "hate",
     "boring",
+    # added during lab expansion
+    "anxious",
+    "exhausted",
+    "worst",
+    "🙄",
+    "😤",
+    "miserable",
+    "sad_emoji",    # mapped from :( in preprocess
 ]
 
 # ---------------------------------------------------------------------
@@ -50,6 +69,15 @@ SAMPLE_POSTS = [
     "This is fine",
     "So excited for the weekend",
     "I am not happy about this",
+    # --- added during lab (Part 1) ---
+    "not bad at all actually pretty decent",        # negation → positive resolution
+    "I absolutely love being stuck in traffic 🙄",  # sarcasm: rule model predicts mixed, not negative
+    "feeling lowkey anxious but hyped for tomorrow", # slang + mixed emotions
+    "this movie was so mid",                        # Gen Z slang; "mid" not in word lists
+    "exhausted but crushing it 💪",                 # mixed: fatigue vs. pride
+    "worst day ever 😤",                            # clear negative with emoji signal
+    "vibes are immaculate today",                   # positive slang
+    "not excited about this at all",               # negation → negative result
 ]
 
 # Human labels for each post above.
@@ -65,9 +93,21 @@ TRUE_LABELS = [
     "neutral",   # "This is fine"
     "positive",  # "So excited for the weekend"
     "negative",  # "I am not happy about this"
+    # --- added during lab ---
+    "positive",  # "not bad at all actually pretty decent"
+    "negative",  # "I absolutely love being stuck in traffic 🙄" (sarcasm)
+    "mixed",     # "feeling lowkey anxious but hyped for tomorrow"
+    "negative",  # "this movie was so mid" (Gen Z slang for mediocre/bad)
+    "mixed",     # "exhausted but crushing it 💪"
+    "negative",  # "worst day ever 😤"
+    "positive",  # "vibes are immaculate today"
+    "negative",  # "not excited about this at all"
 ]
 
-# TODO: Add 5-10 more posts and labels.
+assert len(SAMPLE_POSTS) == len(TRUE_LABELS), (
+    f"SAMPLE_POSTS has {len(SAMPLE_POSTS)} entries but TRUE_LABELS has {len(TRUE_LABELS)}. "
+    "Add a matching label for every post."
+)
 #
 # Requirements:
 #   - For every new post you add to SAMPLE_POSTS, you must add one
